@@ -98,5 +98,6 @@ module.exports = (sequelize, DataTypes) => {
     user.password = hashedPass;
     user.isAdmin = false;
   })
+
   return User;
 };

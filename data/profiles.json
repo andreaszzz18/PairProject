@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Andreas",
+    "dateOfBirth": "02/03/1992",
+    "gender": "Male",
+    "imageURL": "http://localhost:3000/1688635332529.jpg",
+    "UserId": 1
+  },
+  {
+    "name": "Mary",
+    "dateOfBirth": "06/03/1997",
+    "gender": "Female",
+    "imageURL": "http://localhost:3000/1688635332527.jpg",
+    "UserId": 2
+  },
+  {
+    "name": "John",
+    "dateOfBirth": "08/03/1990",
+    "gender": "Male",
+    "imageURL": "http://localhost:3000/1688635332528.png",
+    "UserId": 3
+  }
+
+]

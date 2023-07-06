@@ -1,0 +1,20 @@
+[
+  {
+    "userName": "andreaszzzz18",
+    "email": "andreas18@gmail.com",
+    "password": "apaajalah18",
+    "isAdmin": "true"
+  },
+  {
+    "userName": "maryAnn",
+    "email": "sleepymary@gmail.com",
+    "password": "imhungry",
+    "isAdmin": "false"
+  },
+  {
+    "userName": "johndoe",
+    "email": "johndoe@gmail.com",
+    "password": "imsleepy",
+    "isAdmin": "false"
+  }
+]
