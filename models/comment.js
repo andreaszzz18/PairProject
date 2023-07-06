@@ -25,5 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Comment',
   });
+
+  Comment.beforeCreate(comment => {
+    comment.likes = 0;
+  })
   return Comment;
 };

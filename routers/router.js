@@ -37,7 +37,11 @@ router.use((request, response, next) => {
 })
 
 router.get("/home", Controller.renderHome);
-router.get("/edit/profile/:id", UserController.editProfileRender);
-router.post("/edit/profile/:id", UserController.editProfileProcess);
+router.get("/edit/:id/profile", UserController.editProfileRender);
+router.post("/edit/:id/profile/", UserController.editProfileProcess);
+router.get("/logout", UserController.logout)
+router.get('/post/add/', Controller.addPostRender)
+router.post('/post/add/', Controller.addPostProcess)
+router.post("/commend/add/:id", Controller.addCommend)
 
 module.exports = router;

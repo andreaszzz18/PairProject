@@ -10,14 +10,33 @@
 <body style="background-color: rgba(128, 128, 128, 0.678);">
   <%- include('partials/navBar') %>
     <div style="margin:2% 20% 0 20%;">
+      <div  style="text-align: center;">
+        <a class="btn btn-dark" href="/post/add">Add post</a>
+      </div>
         <% postData?.forEach(post => {  %>
           <div class="card" style="width: 100%;">
-            <img src="<%= post.imageURL %>" class="card-img-top" alt="...">
+            <img src="<%= post.imageURL %>" class="card-img-top" alt="">
             <div class="card-body">
+              <% if(post.User.id === userData.id) { %> <a class="btn btn-danger" href="/post/delete/<%= post.id  %>">Delete</a> <a class="btn btn-warning" href="/post/edit/<%= post.id  %>">Edit</a> <% } %>
               <h5 class="card-title"><%= post.title %></h5>
               <p class="card-text"><%= post.caption %></p>
-              <p><%= post.likes %></p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <p class="card-text"><%= post.likes %></p>
+              <table class="table table-dark">
+              <% post.Comments?.forEach(comment => { %>
+                <tr>
+                      <td><%= comment.User.Profile.name %> :</td>
+                      <td><%= comment.content %></td>
+                      <td><%= comment.likes %></td>
+                    </tr>
+                <% }) %>
+              </table>
+                <div>
+                  <form action="/commend/add/<%= post.id  %>" method="post">
+                    <input class="mb-3" type="text" name="content">
+                    <button class="btn btn-dark" type="submit">Add comment</button>
+                  </form>
+                </div>
+              </table>
             </div>
           </div>
         <% }); %>
