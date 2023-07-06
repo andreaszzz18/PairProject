@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     const salt = bcrypt.genSaltSync(10);
     const hashedPass = bcrypt.hashSync(user.password, salt);
 
+    console.log(hashedPass, 123123123)
+
     user.password = hashedPass;
     user.isAdmin = false;
   })
