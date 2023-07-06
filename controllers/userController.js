@@ -137,7 +137,58 @@ class UserController{
     }
 
     static editProfileProcess(request, response){
-        
+        const {userName, email, oldPassword, newPassword} = request.body;
+        const {name, dateOfBirth, gender, imageURL} = request.body;
+        const id = request.params.id
+
+        console.log(oldPassword, 32111111111)
+
+        const tempObj = {}
+        User.findByPk(id, {include:Profile})
+        .then((userDatum)=>{
+
+            const validationPass = bcrypt.compareSync(oldPassword, userDatum.password);
+            if(validationPass){
+                if(oldPassword ===" " || newPassword ===" "){
+                    return User.update({userName, email},{
+                        where:{
+                            id
+                        }
+                    })
+                }
+
+                tempObj.userDatum = userDatum
+                return User.update({userName, email, password: newPassword},{
+                    where:{
+                        id
+                    }
+                })
+            } else {
+                const err = "Old password is not valid"
+                return response.redirect(`/edit/${id}/profile?errors=${err}`)
+            }
+        })
+        .then(() => {
+            return Profile.update({name, dateOfBirth, gender, imageURL},{
+                where:{
+                    id : tempObj.userDatum.Profile.id
+                }
+            })
+        })
+        .then(() => {
+            response.redirect("/home")
+        })
+        .catch(err => {
+            console.log(err);
+            response.send(err);
+        });
+
+    }
+    static logout(request, response){
+        if(request.session){
+            request.session.destroy();
+            response.redirect("/")
+        }
     }
 }
 

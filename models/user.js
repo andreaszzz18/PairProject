@@ -97,5 +97,12 @@ module.exports = (sequelize, DataTypes) => {
     user.isAdmin = false;
   })
 
+  User.beforeUpdate((user, option) => {
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPass = bcrypt.hashSync(user.password, salt);
+
+    user.password = hashedPass;
+  })
+
   return User;
 };
