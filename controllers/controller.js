@@ -5,6 +5,7 @@ class Controller{
   static renderHome(request, response){
     const id = request.session.userId;
 
+    
     User.findByPk(id, {
       include: {
         all: true,
@@ -13,6 +14,7 @@ class Controller{
     })
     .then(userData => {
       response.render('home', {userData});
+
     })
     .catch(err => {
       console.log(err);
