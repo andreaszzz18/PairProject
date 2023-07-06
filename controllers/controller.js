@@ -2,8 +2,8 @@ const {Comment, Post, Profile, User} = require("../models");
 
 class Controller{
 
-  static postUserProfile(request, respond){
-    
+  static renderHome(request, response){
+    response.render('home')
   }
 
 }
