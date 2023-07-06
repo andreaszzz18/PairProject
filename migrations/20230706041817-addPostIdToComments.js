@@ -12,7 +12,7 @@ module.exports = {
     return queryInterface.addColumn('Comments', 'PostId', {
       type: Sequelize.INTEGER,
         references: {
-          model: "Users",
+          model: "Comments",
           key: "id"
         }
     })
