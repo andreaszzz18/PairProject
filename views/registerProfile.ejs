@@ -6,15 +6,41 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/register/<%= id %>" method="post">
+    <form action="/register/<%= id %>" method="post" enctype="multipart/form-data">
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" required><br>
+        <input type="text" id="name" name="name" ><br>
+        <% if(errorCategory.name){ %>
+            <% showError(errorCategory.name).forEach(el =>{ %>
+                <p style="color: red;"><%= el %></p>
+           <% }) %>
+        <% } %>
+        
         <label for="dateOfBirth">Date of birth</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" ><br>
+        <% if(errorCategory.date){ %>
+            <% showError(errorCategory.date).forEach(el =>{ %>
+                <p style="color: red;"><%= el %></p>
+           <% }) %>
+        <% } %>
+
         <label for="gender">Gender</label>
-        <input type="text" id="gender" name="gender" required><br>
-        <label for="imageURL">image URL</label>
-        <input type="text" id="imageURL" name="imageURL" required><br>
+        <input type="text" id="gender" name="gender" ><br>
+        <% if(errorCategory.gender){ %>
+            <% showError(errorCategory.gender).forEach(el =>{ %>
+                <p style="color: red;"><%= el %></p>
+           <% }) %>
+        <% } %>
+
+        <label for="imageURL">image URL</label><br>
+        <input type="file" id="imageURL" name="imageURL" >
+        <% if(errorCategory.image){ %>
+            <% showError(errorCategory.image).forEach(el =>{ %>
+                <p style="color: red;"><%= el %></p>
+           <% }) %>
+        <% } %>
+
+        <br><br>
+
         <button type="submit">Register</button>
     </form>
     <a href="/login">login</a>

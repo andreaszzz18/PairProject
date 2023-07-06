@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         is: {
           args: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-          msg: "Minimum 8 characters and at least one letter and one number"
+          msg: "Password minimum 8 characters and at least contains one letter and one number"
         }
       }
 

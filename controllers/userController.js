@@ -1,5 +1,6 @@
 const {User, Profile} = require("../models")
 const bcrypt = require('bcryptjs');
+const { validationCategory, showError } = require('../helpers/helper')
 
 class UserController{
     static redirectLogin(request,response){
@@ -7,7 +8,18 @@ class UserController{
     }
 
     static registerRender(request, response){
-        response.render("register");
+    
+        
+        let errors = request.query
+        
+        let errorCategory = {}
+        if(errors.errorValidation){
+            errorCategory = validationCategory(errors.errorValidation.split(","))
+        }
+
+        console.log(errorCategory)
+
+        response.render("register", {errorCategory, showError});
     }
 
     static userCreate(request, response){
@@ -21,27 +33,58 @@ class UserController{
             // response.send(user)
         })
         .catch(err => {
-            console.log(err);
-            response.send(err);
+            if(err.name === "SequelizeValidationError"){
+                let message = err.errors.map(el =>{
+                    return el.message
+                })
+
+                response.redirect(`/register?errorValidation=${message}`)
+
+            }else{
+                response.send(err);
+            }
+
+            
         });
     }
 
     static profileRegisterRender(request, response){
         const id = request.params.id;
-        response.render("registerProfile", {id})
+
+        let errors = request.query
+        let errorCategory = {}
+        if(errors.errorValidation){
+            errorCategory = validationCategory(errors.errorValidation.split(","))
+        }
+
+        response.render("registerProfile", {id, errorCategory, showError})
     }
 
     static profileCreate(request, response){
         const id = request.params.id;
-        const {name, dateOfBirth, gender, imageURL} = request.body;
+        const {name, dateOfBirth, gender} = request.body;
 
-        console.log(id, name, dateOfBirth, gender, imageURL)
+        let imageURL = ""
+        if(request.file){
+            imageURL = `http://localhost:3000/images/${request.file.filename}`
+        }
+        
+        
 
         Profile.create({name, dateOfBirth, gender, imageURL, UserId:id})
         .then(() => response.redirect("/login"))
         .catch(err => {
-            console.log(err);
-            response.send(err);
+            if(err.name === "SequelizeValidationError"){
+                let message = err.errors.map(el =>{
+                    return el.message
+                })
+                response.redirect(`/register/${id}?errorValidation=${message}`)
+                // response.send(message)
+
+            }else{
+                response.send(err);
+            }
+            
         });
     }
     

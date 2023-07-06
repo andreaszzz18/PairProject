@@ -9,7 +9,7 @@ const UserController = require("../controllers/userController")
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-        cb(null, '../public')
+        cb(null, './public')
       
   }, 
   filename: (req, file, cb) =>{
@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage: storage})
 
-app.use(express.static('views'))
+router.use(express.static('views'))
 
 router.get("/", UserController.redirectLogin);
 router.use("/login", loginRouter)

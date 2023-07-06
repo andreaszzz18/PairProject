@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         is:{
           args: /^[a-zA-Z ]*$/, 
-          msg: "Can only contain Alphabet and Space"
+          msg: "Name can only contain Alphabet and Space"
         }
       }
     },
@@ -86,23 +86,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        notEmpty:{
-          args: true,
-          msg: "Image is required"
-        },
-        notNull:{
-          args: true,
-          msg: "Image is required"
-        },
         imageValidate(value){
-          const fileType = value[value.length-3] + value[value.length-2] + value[value.length-1]  
+          if(!value){
+            throw new Error('Image is required')
+          }
 
+          const fileType = value[value.length-3] + value[value.length-2] + value[value.length-1]  
           if(fileType !== "png" && fileType !== "jpg"){
-            throw new Error('Only png and jpg allowed')
+            throw new Error('Image type can only be png and jpg')
           }
 
           
         }
+
       }
     },
 
@@ -112,5 +108,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Profile',
   });
+
+  
+
   return Profile;
 };
