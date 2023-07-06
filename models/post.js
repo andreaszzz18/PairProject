@@ -12,6 +12,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Post.belongsTo(models.User)
+      Post.hasMany(models.Comment)
+    }
+
+    static findAllWithAllAssosiate(){
+      return this.findAll({
+        include: {
+          all: true,
+          nested: true
+      }
+    })
     }
   }
   Post.init({
