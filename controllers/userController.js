@@ -120,6 +120,25 @@ class UserController{
             response.send(err);
         });
     }
+
+    static editProfileRender(request, response){
+        const id = request.params.id
+
+        User.findByPk(id, {
+            include: Profile
+        })
+        .then(userDatum => {
+            response.render("editProfile", {userDatum})
+        })
+        .catch(err => {
+            console.log(err);
+            response.send(err);
+        });
+    }
+
+    static editProfileProcess(request, response){
+        
+    }
 }
 
 module.exports = UserController;
