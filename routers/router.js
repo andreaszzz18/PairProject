@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const path = require('path')
 const multer = require('multer')
+const registerRouter = require('./registerRouter')
+const loginRouter = require('./loginRouter');
 const Controller = require("../controllers/controller");
 const UserController = require("../controllers/userController")
 
@@ -19,12 +21,10 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 
-router.get("/", UserController.redirectRegister);
+router.get("/", UserController.redirectLogin);
 
-router.get("/register", UserController.registerRender);
-router.post("/register", UserController.registerCreate);
-router.get("/login", UserController.loginRender);
-router.post("/login", UserController.loginProcess);
+router.use("/login", loginRouter)
+router.use("/register", registerRouter)
 
 router.use((request, response, next) => {
   if(!request.session.userId){

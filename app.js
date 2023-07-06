@@ -11,7 +11,8 @@ app.use(session({
   secret: 'kuda terbang',
   resave: false,
   saveUninitialized: false,
-  cookie: { 
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24, 
     secure: false, //kalau udah mau deploy true
     sameSite: true //Security cookie, jangan keambil cookie kita
   } 

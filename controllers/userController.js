@@ -1,19 +1,43 @@
-const {User} = require("../models")
+const {User, Profile} = require("../models")
 const bcrypt = require('bcryptjs');
 
 class UserController{
-    static redirectRegister(request,response){
-        response.redirect("/register");
+    static redirectLogin(request,response){
+        response.redirect("/login");
     }
 
     static registerRender(request, response){
         response.render("register");
     }
 
-    static registerCreate(request, response){
-        const {userName, email, password, dateOfBirth} = request.body;
+    static userCreate(request, response){
+        const {userName, email, password} = request.body;
 
-        User.create({userName, email, password, dateOfBirth})
+        console.log(userName, email, password)
+
+        User.create({userName, email, password})
+        .then((user) =>{
+            response.redirect(`/register/${user.id}`)
+            // response.send(user)
+        })
+        .catch(err => {
+            console.log(err);
+            response.send(err);
+        });
+    }
+
+    static profileRegisterRender(request, response){
+        const id = request.params.id;
+        response.render("registerProfile", {id})
+    }
+
+    static profileCreate(request, response){
+        const id = request.params.id;
+        const {name, dateOfBirth, gender, imageURL} = request.body;
+
+        console.log(id, name, dateOfBirth, gender, imageURL)
+
+        Profile.create({name, dateOfBirth, gender, imageURL, UserId:id})
         .then(() => response.redirect("/login"))
         .catch(err => {
             console.log(err);
