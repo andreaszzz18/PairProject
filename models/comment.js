@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const { combineTableNames } = require('sequelize/types/utils');
+
 module.exports = (sequelize, DataTypes) => {
   class Comment extends Model {
     /**
