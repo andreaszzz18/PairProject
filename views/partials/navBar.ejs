@@ -1,0 +1,27 @@
+<nav class="navbar bg-dark border-bottom border-bottom-dark sticky-top navbar-expand-lg" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input style="width: 500px;" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= userData.userName %>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>

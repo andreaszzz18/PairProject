@@ -5,16 +5,20 @@ class Controller{
   static renderHome(request, response){
     const id = request.session.userId;
 
-    
+    const result = {};
     User.findByPk(id, {
-      include: {
-        all: true,
-        nested: true
-      }
+      include: Profile
     })
     .then(userData => {
-      response.render('home', {userData});
+      result.userData = userData;
 
+      return Post.findAllWithAllAssosiate()
+    })
+    .then((postData) => {
+      result.postData = postData;
+
+      response.render('home', result);
+      // response.send(result)
     })
     .catch(err => {
       console.log(err);
