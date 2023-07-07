@@ -19,8 +19,9 @@
             <div class="card-body">
               <% if(post.User.id === userData.id) { %> <a class="btn btn-danger" href="/post/delete/<%= post.id  %>">Delete</a> <a class="btn btn-warning" href="/post/edit/<%= post.id  %>">Edit</a> <% } %>
               <h5 class="card-title"><%= post.title %></h5>
+              <h5 class="card-title"><%= post.User.Profile.name %></h5>
               <p class="card-text"><%= post.caption %></p>
-              <p class="card-text"><%= post.likes %></p>
+              <p class="card-text">Likes: <%= post.likes %> <a class="btn btn-dark" href="/post/likes/<%= post.id %>">Like</a></p>
               <table class="table table-dark">
               <% post.Comments?.forEach(comment => { %>
                 <tr>

@@ -37,11 +37,21 @@ router.use((request, response, next) => {
 })
 
 router.get("/home", Controller.renderHome);
+router.post("/commend/add/:id", Controller.addCommend)
+
 router.get("/edit/:id/profile", UserController.editProfileRender);
 router.post("/edit/:id/profile/", UserController.editProfileProcess);
-router.get("/logout", UserController.logout)
+
 router.get('/post/add/', Controller.addPostRender)
 router.post('/post/add/', Controller.addPostProcess)
-router.post("/commend/add/:id", Controller.addCommend)
+
+router.get("/post/edit/:id", Controller.postEditRender)
+router.post("/post/edit/:id", Controller.postEdit)
+
+router.get("/post/delete/:id", Controller.postDestroy)
+
+router.get("/post/likes/:id", Controller.likePlus)
+
+router.get("/logout", UserController.logout)
 
 module.exports = router;
